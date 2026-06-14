@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Wisdom Circle — Books & Knowledge by B.Krishna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1C1410;
+  --ink2:#2E2520;
+  --parchment:#F7F2E8;
+  --parchment2:#EDE7D6;
+  --gold:#E8A020;
+  --gold-light:#F5C84A;
+  --sage:#2D5A3D;
+  --sage-light:#3D7A52;
+  --rose:#C45C6A;
+  --muted:#8A7B6E;
+  --border:rgba(28,20,16,.1);
+  --white:#FFFFFF;
+  --card-bg:#FFFFFF;
+  --shadow:0 4px 24px rgba(28,20,16,.08);
+  --shadow-lg:0 12px 48px rgba(28,20,16,.14);
+}
+html{scroll-behavior:smooth}
+body{background:var(--parchment);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ── Pages ── */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* ── Nav ── */
+header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(247,242,232,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:70px;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:700;
+  color:var(--ink);
+}
+.logo-icon{
+  width:36px;height:36px;
+  background:var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;color:var(--ink);font-weight:700;
+  position:relative;overflow:hidden;
+}
+.logo-icon::after{
+  content:'';position:absolute;inset:4px;
+  border:1.5px solid rgba(28,20,16,.2);
+  border-radius:50%;
+}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links button{
+  background:none;border:none;cursor:pointer;
+  padding:8px 16px;border-radius:8px;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;
+  color:var(--muted);transition:all .2s;
+}
+.nav-links button:hover,.nav-links button.active{color:var(--ink);background:var(--parchment2)}
+.nav-links button.active{color:var(--sage);font-weight:600}
+.nav-cta{
+  padding:10px 22px!important;
+  background:var(--sage)!important;
+  color:var(--white)!important;
+  border-radius:100px!important;
+}
+.nav-cta:hover{background:var(--sage-light)!important;color:var(--white)!important}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 16px;border-top:1px solid var(--border)}
+.mobile-menu button{background:none;border:none;cursor:pointer;padding:10px 0;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);text-align:left;border-bottom:1px solid var(--border)}
+
+/* ── Cookie Banner ── */
+#cookie-banner{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  z-index:500;
+  background:var(--ink);color:var(--parchment);
+  border-radius:16px;padding:20px 28px;
+  max-width:560px;width:calc(100% - 48px);
+  box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:20px;
+  animation:slideUp .4s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+#cookie-banner p{font-size:.85rem;line-height:1.5;flex:1}
+#cookie-banner a{color:var(--gold-light);text-decoration:underline}
+.cookie-btns{display:flex;gap:8px;flex-shrink:0}
+.cookie-accept{
+  padding:9px 20px;background:var(--gold);color:var(--ink);
+  border:none;border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-weight:600;font-size:.85rem;
+}
+.cookie-decline{
+  padding:9px 16px;background:transparent;color:var(--parchment);
+  border:1px solid rgba(247,242,232,.3);border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;
+}
+
+/* ── Footer ── */
+footer{
+  background:var(--ink);color:var(--parchment);
+  padding:64px 32px 32px;
+}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{color:var(--parchment);margin-bottom:12px;display:inline-flex}
+.footer-brand .logo span{color:var(--gold)}
+.footer-tagline{font-size:.9rem;color:rgba(247,242,232,.6);line-height:1.7;margin-top:8px}
+.footer-col h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:16px;color:var(--gold)}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li button,.footer-col ul li a{
+  background:none;border:none;cursor:pointer;padding:0;
+  font-family:'DM Sans',sans-serif;font-size:.88rem;
+  color:rgba(247,242,232,.55);text-decoration:none;
+  transition:color .2s;
+}
+.footer-col ul li button:hover,.footer-col ul li a:hover{color:var(--parchment)}
+.footer-bottom{
+  border-top:1px solid rgba(247,242,232,.1);
+  padding-top:24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:.8rem;color:rgba(247,242,232,.4)}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:.8rem;color:rgba(247,242,232,.4);text-decoration:none;transition:color .2s}
+.footer-bottom-links a:hover{color:var(--parchment)}
+
+/* ── Section helpers ── */
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.section-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--sage);margin-bottom:14px;
+}
+.section-eyebrow::before{content:'';width:24px;height:2px;background:var(--sage)}
+h2.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  line-height:1.15;letter-spacing:-.02em;
+  color:var(--ink);margin-bottom:16px;
+}
+.section-sub{font-size:1rem;color:var(--muted);max-width:52ch;line-height:1.7}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+/* ─────────────────────── HOME PAGE ─────────────────────── */
+/* Hero */
+.hero{
+  padding:80px 32px 100px;
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.hero-left{}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(232,160,32,.15);
+  border:1px solid rgba(232,160,32,.3);
+  border-radius:100px;padding:6px 16px;
+  font-size:.8rem;font-weight:600;color:var(--gold);
+  margin-bottom:24px;letter-spacing:.04em;
+}
+.hero-badge-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+h1.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,5vw,4.2rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.03em;
+  color:var(--ink);margin-bottom:20px;
+}
+h1.hero-title em{font-style:italic;color:var(--sage)}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:46ch}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  padding:14px 30px;
+  background:var(--sage);color:var(--white);
+  border:none;border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-weight:600;font-size:.95rem;
+  transition:all .2s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{background:var(--sage-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(45,90,61,.3)}
+.btn-secondary{
+  padding:14px 30px;
+  background:transparent;color:var(--ink);
+  border:1.5px solid var(--border);border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-weight:500;font-size:.95rem;
+  transition:all .2s;text-decoration:none;display:inline-block;
+}
+.btn-secondary:hover{border-color:var(--ink);background:rgba(28,20,16,.04)}
+.hero-stats{display:flex;gap:32px;margin-top:44px;padding-top:32px;border-top:1px solid var(--border)}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);line-height:1}
+.hero-stat-label{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+
+/* Hero right — circle visual */
+.hero-right{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:480px;
+}
+.circle-rings{position:relative;width:340px;height:340px}
+.ring{
+  position:absolute;border-radius:50%;
+  border:1.5px solid rgba(232,160,32,.2);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  animation:ringExpand .8s ease forwards;
+}
+.ring:nth-child(1){width:100%;height:100%;animation-delay:.1s}
+.ring:nth-child(2){width:78%;height:78%;animation-delay:.2s;border-color:rgba(45,90,61,.25)}
+.ring:nth-child(3){width:58%;height:58%;animation-delay:.3s;border-color:rgba(232,160,32,.35)}
+.ring:nth-child(4){width:40%;height:40%;animation-delay:.4s;background:rgba(232,160,32,.08);border-color:var(--gold)}
+@keyframes ringExpand{from{transform:translate(-50%,-50%) scale(0);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
+.circle-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:110px;height:110px;background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:2.8rem;
+  animation:ringExpand .6s ease .5s forwards;opacity:0;
+  box-shadow:0 8px 32px rgba(232,160,32,.4);
+}
+/* Floating book cards around circle */
+.hero-book-float{
+  position:absolute;background:var(--white);border-radius:14px;
+  padding:12px 16px;box-shadow:var(--shadow);
+  font-size:.8rem;display:flex;align-items:center;gap:10px;
+  animation:float 4s ease-in-out infinite;
+}
+.hero-book-float:nth-child(6){top:10%;right:-10%;animation-delay:0s}
+.hero-book-float:nth-child(7){bottom:15%;left:-8%;animation-delay:1.5s}
+.hero-book-float:nth-child(8){top:45%;right:-14%;animation-delay:.7s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.float-icon{font-size:1.4rem}
+.float-text strong{display:block;font-weight:600;color:var(--ink);font-size:.8rem}
+.float-text span{color:var(--muted);font-size:.72rem}
+
+/* Feature section */
+.features{padding:80px 0;background:var(--white)}
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  margin-top:56px;
+}
+.feature-card{
+  padding:36px 28px;background:var(--parchment);
+  border-radius:20px;border:1px solid var(--border);
+  transition:transform .25s,box-shadow .25s;
+}
+.feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.feature-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:20px;
+}
+.fi-gold{background:rgba(232,160,32,.15)}
+.fi-sage{background:rgba(45,90,61,.12)}
+.fi-rose{background:rgba(196,92,106,.12)}
+.feature-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:10px}
+.feature-card p{font-size:.9rem;color:var(--muted);line-height:1.7}
+
+/* Featured books */
+.featured-books{padding:80px 0}
+.books-scroll{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.book-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .25s,box-shadow .25s;cursor:pointer;
+}
+.book-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.book-cover{
+  height:200px;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;
+}
+.book-cover-inner{
+  width:100px;height:150px;border-radius:4px 10px 10px 4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;box-shadow:6px 6px 20px rgba(0,0,0,.2);
+  position:relative;
+}
+.book-cover-inner::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:8px;
+  background:rgba(0,0,0,.2);border-radius:4px 0 0 4px;
+}
+.book-info{padding:20px}
+.book-genre{
+  display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.tag-fiction{background:rgba(232,160,32,.15);color:var(--gold)}
+.tag-philosophy{background:rgba(45,90,61,.12);color:var(--sage)}
+.tag-science{background:rgba(100,120,200,.12);color:#5568C8}
+.tag-history{background:rgba(196,92,106,.12);color:var(--rose)}
+.tag-selfhelp{background:rgba(180,100,50,.12);color:#B46432}
+.tag-finance{background:rgba(50,150,120,.12);color:#329678}
+.book-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;line-height:1.3;margin-bottom:4px}
+.book-author{font-size:.82rem;color:var(--muted);margin-bottom:12px}
+.book-price-row{display:flex;align-items:center;justify-content:space-between}
+.book-price{font-weight:700;font-size:1rem;color:var(--sage)}
+.btn-buy-sm{
+  padding:7px 16px;background:var(--sage);color:var(--white);
+  border:none;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-size:.8rem;font-weight:600;transition:all .2s;
+}
+.btn-buy-sm:hover{background:var(--sage-light)}
+
+/* Founder section */
+.founder{padding:80px 0;background:var(--white)}
+.founder-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.founder-img{
+  position:relative;
+  width:360px;height:400px;
+  background:linear-gradient(135deg,var(--parchment2),var(--parchment));
+  border-radius:24px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);
+}
+.founder-avatar{
+  width:180px;height:180px;background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:4rem;color:var(--ink);
+  box-shadow:0 12px 40px rgba(232,160,32,.35);
+}
+.founder-badge{
+  position:absolute;bottom:28px;right:-16px;
+  background:var(--sage);color:var(--white);
+  padding:12px 20px;border-radius:12px;
+  font-size:.85rem;font-weight:600;
+  box-shadow:var(--shadow);
+}
+.founder-badge span{display:block;font-size:.72rem;opacity:.7;margin-top:2px}
+.founder-quote{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.5rem;line-height:1.5;color:var(--ink);
+  margin:24px 0;padding-left:20px;
+  border-left:3px solid var(--gold);
+}
+.founder-body{font-size:.95rem;color:var(--muted);line-height:1.8}
+
+/* Testimonials */
+.testimonials{padding:80px 0;background:var(--parchment2)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.testimonial-card{
+  background:var(--white);border-radius:16px;padding:28px;
+  border:1px solid var(--border);
+}
+.stars{color:var(--gold);font-size:1rem;margin-bottom:14px;letter-spacing:2px}
+.testimonial-text{font-size:.92rem;color:var(--ink);line-height:1.7;margin-bottom:20px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.author-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--parchment2);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.9rem;color:var(--sage);
+  flex-shrink:0;
+}
+.author-name{font-weight:600;font-size:.88rem;color:var(--ink)}
+.author-role{font-size:.78rem;color:var(--muted)}
+
+/* ─────────────────────── BLOG PAGE ─────────────────────── */
+.blog-hero{
+  background:linear-gradient(135deg,var(--ink) 0%,var(--ink2) 100%);
+  padding:80px 32px;text-align:center;color:var(--parchment);
+}
+.blog-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,5vw,4rem);font-weight:900;
+  letter-spacing:-.03em;margin-bottom:12px;
+}
+.blog-hero h1 em{font-style:italic;color:var(--gold)}
+.blog-hero p{font-size:1rem;color:rgba(247,242,232,.6);max-width:48ch;margin:0 auto 32px}
+.blog-filters{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+  margin-top:32px;
+}
+.filter-btn{
+  padding:8px 18px;border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;
+  border:1px solid rgba(247,242,232,.2);background:transparent;color:rgba(247,242,232,.6);
+  transition:all .2s;
+}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
+
+.blog-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  padding:60px 32px;max-width:1200px;margin:0 auto;
+}
+.blog-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .25s,box-shadow .25s;cursor:pointer;
+}
+.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.blog-card-cover{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;
+}
+.blog-card-body{padding:24px}
+.blog-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.blog-tag{
+  padding:3px 10px;border-radius:100px;
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+}
+.tag-published{background:rgba(45,90,61,.12);color:var(--sage)}
+.tag-coming{background:rgba(232,160,32,.15);color:var(--gold);border:1px solid rgba(232,160,32,.3)}
+.blog-card-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;
+}
+.blog-card-excerpt{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.blog-card-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.78rem;color:var(--muted);padding-top:14px;
+  border-top:1px solid var(--border);
+}
+.blog-read-more{
+  font-weight:600;color:var(--sage);background:none;border:none;
+  cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;
+  display:flex;align-items:center;gap:4px;transition:gap .2s;
+}
+.blog-read-more:hover{gap:8px}
+
+/* ─────────────────────── EBOOK STORE ─────────────────────── */
+.store-hero{
+  background:linear-gradient(135deg,var(--sage) 0%,var(--sage-light) 100%);
+  padding:64px 32px;color:var(--white);
+}
+.store-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.store-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:900;
+  letter-spacing:-.03em;margin-bottom:10px;
+}
+.store-hero p{font-size:.95rem;opacity:.8;max-width:44ch;line-height:1.7}
+.currency-toggle{
+  background:rgba(255,255,255,.15);border-radius:12px;padding:16px 20px;
+  min-width:200px;border:1px solid rgba(255,255,255,.2);
+}
+.currency-toggle label{font-size:.78rem;opacity:.7;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:8px}
+.currency-select{
+  width:100%;background:transparent;border:none;color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;
+  outline:none;
+}
+.currency-select option{color:var(--ink);background:var(--white)}
+
+.store-controls{
+  padding:24px 32px;max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.genre-filters{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.genre-btn{
+  padding:7px 16px;border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;
+  border:1px solid var(--border);background:var(--white);color:var(--muted);
+  transition:all .2s;
+}
+.genre-btn:hover,.genre-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.store-search{
+  padding:10px 18px;border:1px solid var(--border);border-radius:100px;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;background:var(--white);
+  outline:none;width:240px;
+}
+.store-search:focus{border-color:var(--sage)}
+
+.store-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  padding:8px 32px 60px;max-width:1200px;margin:0 auto;
+}
+/* extended book card */
+.store-book-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .25s,box-shadow .25s;cursor:pointer;
+  position:relative;
+}
+.store-book-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.store-book-card:hover .quick-view{opacity:1}
+.quick-view{
+  position:absolute;top:12px;right:12px;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:8px;padding:6px 12px;
+  font-size:.75rem;font-weight:600;color:var(--sage);
+  opacity:0;transition:opacity .2s;cursor:pointer;
+}
+
+/* ── Book Modal ── */
+#book-modal{
+  position:fixed;inset:0;z-index:900;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(28,20,16,.6);backdrop-filter:blur(6px);
+  padding:24px;
+}
+#book-modal.open{display:flex}
+.modal-inner{
+  background:var(--white);border-radius:24px;
+  max-width:720px;width:100%;
+  box-shadow:var(--shadow-lg);
+  max-height:90vh;overflow-y:auto;
+  animation:modalIn .3s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.modal-close{
+  position:sticky;top:0;float:right;margin:16px 16px 0 0;
+  background:var(--parchment2);border:none;border-radius:50%;
+  width:36px;height:36px;cursor:pointer;font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;z-index:2;
+}
+.modal-body{padding:32px;clear:both}
+.modal-book-layout{display:grid;grid-template-columns:180px 1fr;gap:32px;align-items:start}
+.modal-cover{
+  width:180px;height:260px;border-radius:6px 14px 14px 6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;box-shadow:8px 8px 30px rgba(0,0,0,.2);
+  position:relative;flex-shrink:0;
+}
+.modal-cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:10px;background:rgba(0,0,0,.2);border-radius:6px 0 0 6px}
+.modal-info h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:6px;line-height:1.2}
+.modal-info .book-author{margin-bottom:16px;font-size:.95rem}
+.modal-desc{font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:24px}
+.modal-price-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.modal-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--sage)}
+.btn-checkout{
+  padding:13px 28px;background:var(--gold);color:var(--ink);
+  border:none;border-radius:100px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.92rem;
+  transition:all .2s;
+}
+.btn-checkout:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,160,32,.4)}
+.checkout-anim{display:none;align-items:center;gap:8px;color:var(--sage);font-weight:600;margin-top:12px}
+.checkout-anim.show{display:flex}
+.spinner{width:20px;height:20px;border:2px solid var(--sage);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ─────────────────────── RESOURCES PAGE ─────────────────────── */
+.resources-hero{
+  background:var(--parchment2);
+  padding:64px 32px;text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.resources-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;
+  letter-spacing:-.03em;margin-bottom:12px;
+}
+.resources-hero h1 em{color:var(--sage);font-style:italic}
+.resources-hero p{color:var(--muted);max-width:50ch;margin:0 auto;font-size:1rem;line-height:1.7}
+
+.resources-section{padding:60px 32px;max-width:1200px;margin:0 auto}
+.resource-row{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start;margin-bottom:60px}
+.resource-label-col{position:sticky;top:90px}
+.resource-label{
+  font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;
+  color:var(--ink);margin-bottom:8px;
+}
+.resource-desc{font-size:.9rem;color:var(--muted);line-height:1.7}
+.resource-tools{display:flex;flex-direction:column;gap:16px}
+.resource-tool{
+  background:var(--white);border-radius:16px;
+  border:1px solid var(--border);overflow:hidden;
+  transition:box-shadow .2s;
+}
+.resource-tool:hover{box-shadow:var(--shadow)}
+.tool-header{
+  display:flex;align-items:center;gap:16px;padding:20px 24px;cursor:pointer;
+}
+.tool-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  flex-shrink:0;
+}
+.tool-meta{flex:1}
+.tool-name{font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:2px}
+.tool-tagline{font-size:.83rem;color:var(--muted)}
+.tool-status{
+  padding:4px 12px;border-radius:100px;
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+}
+.status-live{background:rgba(45,90,61,.12);color:var(--sage)}
+.status-soon{background:rgba(232,160,32,.15);color:var(--gold)}
+.tool-expand{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.1rem;transition:transform .2s}
+.tool-body{
+  display:none;padding:0 24px 24px;
+  border-top:1px solid var(--border);margin-top:0;
+}
+.tool-body.open{display:block;padding-top:20px}
+
+/* AI Chat */
+.ai-chat{display:flex;flex-direction:column;gap:12px}
+.ai-input-row{display:flex;gap:10px}
+.ai-input{
+  flex:1;padding:12px 18px;border:1.5px solid var(--border);border-radius:100px;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;background:var(--parchment);outline:none;
+}
+.ai-input:focus{border-color:var(--sage)}
+.ai-send{
+  padding:12px 24px;background:var(--sage);color:var(--white);
+  border:none;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;
+}
+.ai-messages{
+  background:var(--parchment);border-radius:12px;padding:16px;
+  min-height:100px;max-height:260px;overflow-y:auto;
+  display:flex;flex-direction:column;gap:10px;
+}
+.ai-msg{padding:10px 14px;border-radius:10px;font-size:.88rem;line-height:1.6;max-width:90%}
+.ai-msg.user{background:var(--sage);color:var(--white);align-self:flex-end;border-radius:10px 10px 2px 10px}
+.ai-msg.bot{background:var(--white);color:var(--ink);border:1px solid var(--border);align-self:flex-start;border-radius:10px 10px 10px 2px}
+
+/* Sci calc */
+.sci-calc{display:flex;flex-direction:column;gap:12px}
+.calc-display{
+  background:var(--ink);color:var(--parchment);
+  border-radius:10px;padding:16px 20px;
+  font-family:monospace;font-size:1.5rem;text-align:right;
+  min-height:60px;word-break:break-all;
+}
+.calc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.calc-btn{
+  padding:12px;border:none;border-radius:8px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;
+  transition:all .15s;background:var(--parchment2);color:var(--ink);
+}
+.calc-btn:hover{filter:brightness(.93)}
+.calc-btn.op{background:rgba(232,160,32,.2);color:var(--gold)}
+.calc-btn.eq{background:var(--gold);color:var(--ink);grid-column:span 2}
+.calc-btn.fn{background:rgba(45,90,61,.12);color:var(--sage);font-size:.78rem}
+.calc-btn.clear{background:rgba(196,92,106,.15);color:var(--rose)}
+
+/* Equation calc */
+.eq-calc{display:flex;flex-direction:column;gap:12px}
+.eq-input-row{display:flex;gap:10px}
+.eq-input{flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:.9rem;font-family:monospace;background:var(--parchment);outline:none}
+.eq-input:focus{border-color:var(--sage)}
+.eq-solve{padding:12px 22px;background:var(--sage);color:var(--white);border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600}
+.eq-result{background:var(--parchment);border-radius:10px;padding:14px 16px;font-family:monospace;font-size:.95rem;min-height:50px;color:var(--ink)}
+
+/* Graph plotter */
+.graph-area{display:flex;flex-direction:column;gap:12px}
+.graph-input-row{display:flex;gap:10px;flex-wrap:wrap}
+.graph-fn-input{flex:1;min-width:180px;padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:.9rem;font-family:monospace;background:var(--parchment);outline:none}
+.graph-fn-input:focus{border-color:var(--sage)}
+.graph-btn{padding:10px 20px;background:var(--sage);color:var(--white);border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600}
+canvas#graphCanvas{width:100%;height:280px;border-radius:12px;background:var(--parchment);border:1px solid var(--border);display:block}
+
+/* Coming soon card */
+.coming-soon-card{
+  background:linear-gradient(135deg,var(--parchment),var(--parchment2));
+  border-radius:16px;border:1.5px dashed rgba(232,160,32,.4);
+  padding:32px;text-align:center;
+}
+.coming-soon-icon{font-size:2.5rem;margin-bottom:12px}
+.coming-soon-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px}
+.coming-soon-card p{font-size:.88rem;color:var(--muted)}
+
+/* Responsive */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;gap:40px}
+  .hero-right{display:none}
+  .features-grid,.testimonials-grid{grid-template-columns:1fr 1fr}
+  .books-scroll,.store-grid{grid-template-columns:repeat(2,1fr)}
+  .blog-grid{grid-template-columns:repeat(2,1fr)}
+  .founder-inner{grid-template-columns:1fr}
+  .founder-img{width:100%;height:280px}
+  .resource-row{grid-template-columns:1fr}
+  .resource-label-col{position:static}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{padding:40px 20px 60px}
+  .container{padding:0 20px}
+  .features-grid,.testimonials-grid,.books-scroll,.store-grid,.blog-grid{grid-template-columns:1fr}
+  .modal-book-layout{grid-template-columns:1fr}
+  .modal-cover{width:140px;height:200px}
+  .footer-top{grid-template-columns:1fr}
+  .store-controls{padding:16px 20px}
+  .calc-grid{grid-template-columns:repeat(4,1fr)}
+  .calc-btn.eq{grid-column:span 1}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-book-float{animation:none}
+  .ring{animation:none;transform:translate(-50%,-50%) scale(1);opacity:1}
+  .circle-center{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<header>
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showPage('home');return false">
+      <div class="logo-icon">W</div>
+      Wisdom <span>Circle</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><button onclick="showPage('home')" id="nav-home" class="active">Home</button></li>
+      <li><button onclick="showPage('blog')" id="nav-blog">Blog</button></li>
+      <li><button onclick="showPage('store')" id="nav-store">E-Book Store</button></li>
+      <li><button onclick="showPage('resources')" id="nav-resources">Resources</button></li>
+      <li><button onclick="showPage('store')" class="nav-cta">Browse Books</button></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <button onclick="showPage('home');toggleMobile()">Home</button>
+    <button onclick="showPage('blog');toggleMobile()">Blog</button>
+    <button onclick="showPage('store');toggleMobile()">E-Book Store</button>
+    <button onclick="showPage('resources');toggleMobile()">Resources</button>
+  </div>
+</header>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Now accepting pre-orders</div>
+      <h1 class="hero-title">Knowledge is a <em>circle</em> — it always returns.</h1>
+      <p class="hero-sub">Wisdom Circle is a curated library of books, resources, and ideas by B.Krishna — designed to help curious minds grow, reflect, and flourish.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('store')">Explore Books</button>
+        <button class="btn-secondary" onclick="showPage('blog')">Read the Blog</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">48+</div><div class="hero-stat-label">Books Published</div></div>
+        <div><div class="hero-stat-num">12k</div><div class="hero-stat-label">Readers</div></div>
+        <div><div class="hero-stat-num">6</div><div class="hero-stat-label">Genres</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="circle-rings">
+        <div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div>
+        <div class="circle-center">📚</div>
+      </div>
+      <div class="hero-book-float">
+        <span class="float-icon">📖</span>
+        <div class="float-text"><strong>New Release</strong><span>The Wisdom Path</span></div>
+      </div>
+      <div class="hero-book-float">
+        <span class="float-icon">⭐</span>
+        <div class="float-text"><strong>4.9 / 5</strong><span>Reader rating</span></div>
+      </div>
+      <div class="hero-book-float">
+        <span class="float-icon">🌍</span>
+        <div class="float-text"><strong>Global Shipping</strong><span>Multi-currency</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <p class="section-eyebrow reveal">Why Wisdom Circle</p>
+      <h2 class="section-title reveal">Everything a curious mind needs</h2>
+      <div class="features-grid">
+        <div class="feature-card reveal rd1">
+          <div class="feature-icon fi-gold">📚</div>
+          <h3>Curated E-Books</h3>
+          <p>Handpicked titles across philosophy, science, history, finance and fiction — all authored by B.Krishna.</p>
+        </div>
+        <div class="feature-card reveal rd2">
+          <div class="feature-icon fi-sage">🔬</div>
+          <h3>Student Resources</h3>
+          <p>Free scientific calculators, AI assistants, graph plotters and equation solvers built right into the platform.</p>
+        </div>
+        <div class="feature-card reveal rd3">
+          <div class="feature-icon fi-rose">✍️</div>
+          <h3>Thoughtful Blog</h3>
+          <p>Long-form essays and short reflections on ideas that matter — published regularly with genre tags and dates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured books -->
+  <section class="featured-books">
+    <div class="container">
+      <p class="section-eyebrow reveal">Featured</p>
+      <h2 class="section-title reveal">Books by B.Krishna</h2>
+      <p class="section-sub reveal">A small selection from the store. Every book is written, edited and published by the founder.</p>
+      <div class="books-scroll" id="featured-books-grid"></div>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="founder">
+    <div class="container">
+      <div class="founder-inner">
+        <div class="reveal">
+          <div class="founder-img">
+            <div class="founder-avatar">B</div>
+            <div class="founder-badge">Founder<span>B.Krishna</span></div>
+          </div>
+        </div>
+        <div class="reveal rd1">
+          <p class="section-eyebrow">The founder</p>
+          <h2 class="section-title">B.Krishna — author, thinker, educator.</h2>
+          <blockquote class="founder-quote">"A book is a circle of wisdom — it begins with a question and ends with another."</blockquote>
+          <p class="founder-body">B.Krishna founded Wisdom Circle with one belief: that great ideas, expressed clearly, can change how people see the world. Every book in this store is written from lived experience and genuine curiosity — never formula, never filler.</p>
+          <br/>
+          <button class="btn-primary" onclick="showPage('store')">See all books →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <p class="section-eyebrow reveal">Readers say</p>
+      <h2 class="section-title reveal">Words from the circle</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal rd1">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Reading B.Krishna's work feels like having a long conversation with someone who has genuinely thought about life. Changed how I approach every morning."</p>
+          <div class="testimonial-author"><div class="author-avatar">A</div><div><div class="author-name">Ananya Reddy</div><div class="author-role">Philosophy student, Hyderabad</div></div></div>
+        </div>
+        <div class="testimonial-card reveal rd2">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"The resources section alone is worth bookmarking. The graph plotter and AI assistant save me hours every week during exams."</p>
+          <div class="testimonial-author"><div class="author-avatar">R</div><div><div class="author-name">Rahul Sharma</div><div class="author-role">Engineering student, Pune</div></div></div>
+        </div>
+        <div class="testimonial-card reveal rd3">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"I've bought four books from the store already. The checkout experience is smooth and prices in INR make it accessible for all students."</p>
+          <div class="testimonial-author"><div class="author-avatar">P</div><div><div class="author-name">Priya Menon</div><div class="author-role">Teacher, Chennai</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="logo" onclick="showPage('home');return false">
+            <div class="logo-icon">W</div>Wisdom <span>Circle</span>
+          </a>
+          <p class="footer-tagline">A curated library of books, tools and ideas by B.Krishna — for curious minds everywhere.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><button onclick="showPage('home')">Home</button></li>
+            <li><button onclick="showPage('blog')">Blog</button></li>
+            <li><button onclick="showPage('store')">E-Book Store</button></li>
+            <li><button onclick="showPage('resources')">Resources</button></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#" onclick="showModal('privacy')">Privacy Policy</a></li>
+            <li><a href="#" onclick="showModal('terms')">Terms of Use</a></li>
+            <li><a href="#">Cookie Settings</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Wisdom Circle. Founded by B.Krishna. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" onclick="showModal('privacy')">Privacy</a>
+          <a href="#" onclick="showModal('terms')">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ BLOG PAGE ═══════════════ -->
+<div class="page" id="page-blog">
+  <div class="blog-hero">
+    <p class="section-eyebrow" style="color:var(--gold);justify-content:center">Wisdom Circle Blog</p>
+    <h1>Ideas worth <em>reading</em></h1>
+    <p>Essays, reflections and stories from B.Krishna — on philosophy, life, science and the art of thinking well.</p>
+    <div class="blog-filters">
+      <button class="filter-btn active" onclick="filterBlog('all',this)">All</button>
+      <button class="filter-btn" onclick="filterBlog('philosophy',this)">Philosophy</button>
+      <button class="filter-btn" onclick="filterBlog('science',this)">Science</button>
+      <button class="filter-btn" onclick="filterBlog('history',this)">History</button>
+      <button class="filter-btn" onclick="filterBlog('selfhelp',this)">Self-Help</button>
+      <button class="filter-btn" onclick="filterBlog('fiction',this)">Fiction</button>
+    </div>
+  </div>
+  <div class="blog-grid" id="blog-grid"></div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>© 2026 Wisdom Circle. Founded by B.Krishna.</p>
+        <div class="footer-bottom-links">
+          <a href="#" onclick="showModal('privacy')">Privacy</a>
+          <a href="#" onclick="showModal('terms')">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ STORE PAGE ═══════════════ -->
+<div class="page" id="page-store">
+  <div class="store-hero">
+    <div class="store-hero-inner">
+      <div>
+        <p class="section-eyebrow" style="color:rgba(255,255,255,.7)">E-Book Store</p>
+        <h1>Books by B.Krishna</h1>
+        <p>Explore the complete library — philosophy, science, fiction, history, finance and self-help. Secure checkout, instant download.</p>
+      </div>
+      <div class="currency-toggle">
+        <label>View prices in</label>
+        <select class="currency-select" id="currency-select" onchange="updateCurrency()">
+          <option value="INR">🇮🇳 Indian Rupee (₹)</option>
+          <option value="USD">🇺🇸 US Dollar ($)</option>
+          <option value="EUR">🇪🇺 Euro (€)</option>
+          <option value="GBP">🇬🇧 British Pound (£)</option>
+          <option value="JPY">🇯🇵 Japanese Yen (¥)</option>
+          <option value="AUD">🇦🇺 Australian Dollar (A$)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="store-controls">
+    <div class="genre-filters">
+      <button class="genre-btn active" onclick="filterStore('all',this)">All</button>
+      <button class="genre-btn" onclick="filterStore('philosophy',this)">Philosophy</button>
+      <button class="genre-btn" onclick="filterStore('science',this)">Science</button>
+      <button class="genre-btn" onclick="filterStore('history',this)">History</button>
+      <button class="genre-btn" onclick="filterStore('fiction',this)">Fiction</button>
+      <button class="genre-btn" onclick="filterStore('selfhelp',this)">Self-Help</button>
+      <button class="genre-btn" onclick="filterStore('finance',this)">Finance</button>
+    </div>
+    <input class="store-search" placeholder="Search books…" oninput="searchStore(this.value)" />
+  </div>
+  <div class="store-grid" id="store-grid"></div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>© 2026 Wisdom Circle. Founded by B.Krishna.</p>
+        <div class="footer-bottom-links">
+          <a href="#" onclick="showModal('privacy')">Privacy</a>
+          <a href="#" onclick="showModal('terms')">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ RESOURCES PAGE ═══════════════ -->
+<div class="page" id="page-resources">
+  <div class="resources-hero">
+    <p class="section-eyebrow" style="justify-content:center">For Students</p>
+    <h1>Free <em>Learning</em> Resources</h1>
+    <p>Tools built to help students study smarter — a scientific calculator, AI assistant, equation solver, graph plotter, and more coming soon.</p>
+  </div>
+  <div class="resources-section">
+    <!-- AI -->
+    <div class="resource-row reveal">
+      <div class="resource-label-col">
+        <div class="resource-label">🤖 AI Study Assistant</div>
+        <p class="resource-desc">Ask any question and get a clear, thoughtful answer to help with your studies.</p>
+      </div>
+      <div class="resource-tools">
+        <div class="resource-tool">
+          <div class="tool-header" onclick="toggleTool(this)">
+            <div class="tool-icon fi-sage">🤖</div>
+            <div class="tool-meta"><div class="tool-name">Ask Wisdom AI</div><div class="tool-tagline">Powered by Claude — answers any study question</div></div>
+            <span class="tool-status status-live">Live</span>
+            <button class="tool-expand">▾</button>
+          </div>
+          <div class="tool-body">
+            <div class="ai-chat">
+              <div class="ai-messages" id="ai-messages"><div class="ai-msg bot">Hello! I'm the Wisdom Circle AI. Ask me anything — maths, science, history, philosophy. I'm here to help 📚</div></div>
+              <div class="ai-input-row">
+                <input class="ai-input" id="ai-input" placeholder="Ask a study question…" onkeydown="if(event.key==='Enter')sendAI()"/>
+                <button class="ai-send" onclick="sendAI()">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Calculator -->
+    <div class="resource-row reveal">
+      <div class="resource-label-col">
+        <div class="resource-label">🔢 Scientific Calculator</div>
+        <p class="resource-desc">Full-featured scientific calculator with trig, logarithms, powers and more.</p>
+      </div>
+      <div class="resource-tools">
+        <div class="resource-tool">
+          <div class="tool-header" onclick="toggleTool(this)">
+            <div class="tool-icon fi-gold">🔢</div>
+            <div class="tool-meta"><div class="tool-name">Scientific Calculator</div><div class="tool-tagline">Trig, log, powers, brackets and constants</div></div>
+            <span class="tool-status status-live">Live</span>
+            <button class="tool-expand">▾</button>
+          </div>
+          <div class="tool-body">
+            <div class="sci-calc">
+              <div class="calc-display" id="calc-display">0</div>
+              <div class="calc-grid">
+                <button class="calc-btn fn" onclick="calcFn('sin(')">sin</button>
+                <button class="calc-btn fn" onclick="calcFn('cos(')">cos</button>
+                <button class="calc-btn fn" onclick="calcFn('tan(')">tan</button>
+                <button class="calc-btn fn" onclick="calcFn('log(')">log</button>
+                <button class="calc-btn fn" onclick="calcFn('sqrt(')">√</button>
+                <button class="calc-btn fn" onclick="calcFn('Math.PI')">π</button>
+                <button class="calc-btn fn" onclick="calcFn('Math.E')">e</button>
+                <button class="calc-btn fn" onclick="calcFn('**')">xʸ</button>
+                <button class="calc-btn fn" onclick="calcFn('(')">( </button>
+                <button class="calc-btn fn" onclick="calcFn(')')"> )</button>
+                <button class="calc-btn clear" onclick="calcClear()">C</button>
+                <button class="calc-btn clear" onclick="calcDel()">⌫</button>
+                <button class="calc-btn op" onclick="calcFn('%')">%</button>
+                <button class="calc-btn op" onclick="calcFn('/')" style="font-size:1.1rem">÷</button>
+                <button class="calc-btn" onclick="calcFn('7')">7</button>
+                <button class="calc-btn" onclick="calcFn('8')">8</button>
+                <button class="calc-btn" onclick="calcFn('9')">9</button>
+                <button class="calc-btn op" onclick="calcFn('*')">×</button>
+                <button class="calc-btn" onclick="calcFn('4')">4</button>
+                <button class="calc-btn" onclick="calcFn('5')">5</button>
+                <button class="calc-btn" onclick="calcFn('6')">6</button>
+                <button class="calc-btn op" onclick="calcFn('-')">−</button>
+                <button class="calc-btn" onclick="calcFn('1')">1</button>
+                <button class="calc-btn" onclick="calcFn('2')">2</button>
+                <button class="calc-btn" onclick="calcFn('3')">3</button>
+                <button class="calc-btn op" onclick="calcFn('+')">+</button>
+                <button class="calc-btn" onclick="calcFn('0')">0</button>
+                <button class="calc-btn" onclick="calcFn('.')">.</button>
+                <button class="calc-btn eq" onclick="calcEval()">=</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Equation calc -->
+    <div class="resource-row reveal">
+      <div class="resource-label-col">
+        <div class="resource-label">🧮 Equation Calculator</div>
+        <p class="resource-desc">Solve linear and quadratic equations. Enter your expression and get instant results.</p>
+      </div>
+      <div class="resource-tools">
+        <div class="resource-tool">
+          <div class="tool-header" onclick="toggleTool(this)">
+            <div class="tool-icon fi-rose">🧮</div>
+            <div class="tool-meta"><div class="tool-name">Equation Solver</div><div class="tool-tagline">Solves expressions and evaluates mathematical equations</div></div>
+            <span class="tool-status status-live">Live</span>
+            <button class="tool-expand">▾</button>
+          </div>
+          <div class="tool-body">
+            <div class="eq-calc">
+              <p style="font-size:.85rem;color:var(--muted);margin-bottom:8px">Enter an equation or expression (e.g. <code>2x + 5 = 11</code> or <code>x^2 - 4 = 0</code>)</p>
+              <div class="eq-input-row">
+                <input class="eq-input" id="eq-input" placeholder="e.g. 2x + 5 = 11" onkeydown="if(event.key==='Enter')solveEq()"/>
+                <button class="eq-solve" onclick="solveEq()">Solve</button>
+              </div>
+              <div class="eq-result" id="eq-result">Result will appear here…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Graph plotter -->
+    <div class="resource-row reveal">
+      <div class="resource-label-col">
+        <div class="resource-label">📈 Graph Plotter</div>
+        <p class="resource-desc">Plot any mathematical function. Supports sin, cos, tan, polynomials and more.</p>
+      </div>
+      <div class="resource-tools">
+        <div class="resource-tool">
+          <div class="tool-header" onclick="toggleTool(this)">
+            <div class="tool-icon fi-sage">📈</div>
+            <div class="tool-meta"><div class="tool-name">Function Graph Plotter</div><div class="tool-tagline">Plot y = f(x) for any mathematical function</div></div>
+            <span class="tool-status status-live">Live</span>
+            <button class="tool-expand">▾</button>
+          </div>
+          <div class="tool-body">
+            <div class="graph-area">
+              <div class="graph-input-row">
+                <span style="padding:10px 12px;font-size:.9rem;color:var(--muted)">y =</span>
+                <input class="graph-fn-input" id="graph-input" value="Math.sin(x)" placeholder="e.g. Math.sin(x) or x*x"/>
+                <button class="graph-btn" onclick="plotGraph()">Plot</button>
+              </div>
+              <canvas id="graphCanvas" width="800" height="280"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="coming-soon-card">
+          <div class="coming-soon-icon">🚀</div>
+          <h3>More resources coming soon</h3>
+          <p>A periodic table explorer, unit converter, physics formula sheet and statistics tools are on the way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>© 2026 Wisdom Circle. Founded by B.Krishna.</p>
+        <div class="footer-bottom-links">
+          <a href="#" onclick="showModal('privacy')">Privacy</a>
+          <a href="#" onclick="showModal('terms')">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Book Modal -->
+<div id="book-modal" role="dialog" aria-modal="true">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Privacy / Terms Modal -->
+<div id="legal-modal" role="dialog" aria-modal="true" style="position:fixed;inset:0;z-index:901;display:none;align-items:center;justify-content:center;background:rgba(28,20,16,.6);backdrop-filter:blur(6px);padding:24px;">
+  <div style="background:var(--white);border-radius:20px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;padding:40px;animation:modalIn .3s ease;position:relative;">
+    <button onclick="closeLegal()" style="position:absolute;top:16px;right:16px;background:var(--parchment2);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;">✕</button>
+    <div id="legal-body"></div>
+  </div>
+</div>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner">
+  <p>We use cookies to improve your experience. Read our <a href="#" onclick="showModal('privacy')">Privacy Policy</a> and <a href="#" onclick="showModal('terms')">Terms of Use</a>.</p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
+    <button class="cookie-decline" onclick="acceptCookies()">Decline</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const currencyRates={INR:1,USD:0.012,EUR:0.011,GBP:0.0095,JPY:1.77,AUD:0.018};
+const currencySymbols={INR:'₹',USD:'$',EUR:'€',GBP:'£',JPY:'¥',AUD:'A$'};
+let currentCurrency='INR';
+
+const books=[
+  {id:1,title:'The Art of Thinking Clearly',author:'B.Krishna',genre:'philosophy',cover:'🏛️',color:'#D4A853',bg:'#F5E8C0',price:299,desc:'A deep exploration of cognitive biases and how to overcome them. This book teaches you to see through mental fog and make better decisions every day.'},
+  {id:2,title:'Quantum Mind',author:'B.Krishna',genre:'science',cover:'⚛️',color:'#5568C8',bg:'#C8D0F0',price:349,desc:'Where modern physics meets consciousness. A fascinating journey through quantum mechanics and what it reveals about the nature of reality.'},
+  {id:3,title:'The Circle of History',author:'B.Krishna',genre:'history',cover:'🌍',color:'#C45C6A',bg:'#F0C8CC',price:279,desc:'Civilisations rise and fall in patterns. This book traces those cycles and finds the lessons hidden in thousands of years of human history.'},
+  {id:4,title:'Midnight Parables',author:'B.Krishna',genre:'fiction',cover:'🌙',color:'#6B5A8A',bg:'#D8CCEC',price:249,desc:'A collection of short fictions that blur the line between allegory and reality — each story a small lantern in the dark.'},
+  {id:5,title:'The Money Mind',author:'B.Krishna',genre:'finance',cover:'💰',color:'#329678',bg:'#BCECD8',price:399,desc:'Personal finance meets philosophy. How to think about money, time and freedom — and build a life that money serves, not controls.'},
+  {id:6,title:'Daily Wisdom',author:'B.Krishna',genre:'selfhelp',cover:'☀️',color:'#B46432',bg:'#F0D8B8',price:199,desc:'365 short reflections — one for each morning. Grounded in ancient philosophy and modern research to start every day with clarity.'},
+  {id:7,title:'The Logic of Emotion',author:'B.Krishna',genre:'philosophy',cover:'💫',color:'#D4A853',bg:'#F5E8C0',price:319,desc:'Emotions are not the opposite of reason — they are its oldest language. A guide to understanding your inner life with rigour and compassion.'},
+  {id:8,title:'Stars and Equations',author:'B.Krishna',genre:'science',cover:'🌟',color:'#5568C8',bg:'#C8D0F0',price:359,desc:'The mathematics behind the cosmos. Written for curious non-experts who want to understand why the universe works the way it does.'},
+];
+
+const blogPosts=[
+  {id:1,title:'Why Every Civilisation Eventually Forgets Itself',genre:'history',status:'published',date:'June 2, 2026',cover:'🏛️',bg:'#F0C8CC',excerpt:'History is not a straight line — it is a spiral. Civilisations repeat their mistakes not from ignorance but from forgetting.',readTime:'8 min'},
+  {id:2,title:'The Quiet Discipline of Thinking Well',genre:'philosophy',status:'published',date:'May 22, 2026',cover:'🧠',bg:'#D8CCEC',excerpt:'There is a kind of discipline that looks like nothing — no gym, no schedule. Just the daily habit of questioning your assumptions.',readTime:'6 min'},
+  {id:3,title:'Quantum Uncertainty Is Not Your Friend — And That Is Fine',genre:'science',status:'published',date:'May 10, 2026',cover:'⚛️',bg:'#C8D0F0',excerpt:'People often misuse quantum uncertainty as a spiritual escape hatch. Here is what it actually means — and what it does not.',readTime:'10 min'},
+  {id:4,title:'The Fear of Starting: A Self-Help Myth Debunked',genre:'selfhelp',status:'published',date:'April 30, 2026',cover:'🚀',bg:'#BCECD8',excerpt:'We are told to wait until we feel ready. That is often the worst advice. Starting is the only cure for not starting.',readTime:'5 min'},
+  {id:5,title:'The Hidden Philosophy in Great Fiction',genre:'fiction',status:'coming',date:'Coming July 2026',cover:'📖',bg:'#F5E8C0',excerpt:'Every great novel is an argument about what it means to be human. This essay traces the philosophical spine of five classic works.',readTime:'12 min'},
+  {id:6,title:'Money as a Mirror: What Your Finances Say About Your Values',genre:'finance',status:'coming',date:'Coming August 2026',cover:'💡',bg:'#F0D8B8',excerpt:'Money is never just money. How you earn, spend and hold it reflects the deepest assumptions you carry about safety, freedom and worth.',readTime:'9 min'},
+];
+
+// ── RENDER ──
+function formatPrice(priceINR){
+  const rate=currencyRates[currentCurrency];
+  const sym=currencySymbols[currentCurrency];
+  const val=(priceINR*rate);
+  return sym+(val<10?val.toFixed(2):Math.round(val));
+}
+
+function renderFeaturedBooks(){
+  const el=document.getElementById('featured-books-grid');
+  el.innerHTML=books.slice(0,4).map(b=>`
+    <div class="book-card" onclick="openBook(${b.id})">
+      <div class="book-cover" style="background:${b.bg}">
+        <div class="book-cover-inner" style="background:${b.color}">${b.cover}</div>
+      </div>
+      <div class="book-info">
+        <span class="book-genre tag-${b.genre}">${b.genre}</span>
+        <h3 class="book-title">${b.title}</h3>
+        <p class="book-author">B.Krishna</p>
+        <div class="book-price-row">
+          <span class="book-price" data-price="${b.price}">${formatPrice(b.price)}</span>
+          <button class="btn-buy-sm" onclick="event.stopPropagation();openBook(${b.id})">View</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+let storeFilter='all', storeSearch='';
+function renderStore(){
+  const el=document.getElementById('store-grid');
+  const filtered=books.filter(b=>{
+    const matchGenre=storeFilter==='all'||b.genre===storeFilter;
+    const matchSearch=b.title.toLowerCase().includes(storeSearch.toLowerCase());
+    return matchGenre&&matchSearch;
+  });
+  el.innerHTML=filtered.map(b=>`
+    <div class="store-book-card" onclick="openBook(${b.id})">
+      <div class="quick-view">Quick View</div>
+      <div class="book-cover" style="background:${b.bg}">
+        <div class="book-cover-inner" style="background:${b.color}">${b.cover}</div>
+      </div>
+      <div class="book-info">
+        <span class="book-genre tag-${b.genre}">${b.genre}</span>
+        <h3 class="book-title">${b.title}</h3>
+        <p class="book-author">by B.Krishna</p>
+        <div class="book-price-row">
+          <span class="book-price" data-price="${b.price}">${formatPrice(b.price)}</span>
+          <button class="btn-buy-sm" onclick="event.stopPropagation();openBook(${b.id})">Buy</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+let blogFilter='all';
+function renderBlog(){
+  const el=document.getElementById('blog-grid');
+  const filtered=blogPosts.filter(p=>blogFilter==='all'||p.genre===blogFilter);
+  el.innerHTML=filtered.map(p=>`
+    <div class="blog-card">
+      <div class="blog-card-cover" style="background:${p.bg};font-size:3rem">${p.cover}</div>
+      <div class="blog-card-body">
+        <div class="blog-card-tags">
+          <span class="blog-tag tag-${p.genre}">${p.genre}</span>
+          <span class="blog-tag ${p.status==='published'?'tag-published':'tag-coming'}">${p.status==='published'?'Published':'Coming Soon'}</span>
+        </div>
+        <h3 class="blog-card-title">${p.title}</h3>
+        <p class="blog-card-excerpt">${p.excerpt}</p>
+        <div class="blog-card-meta">
+          <span>${p.date}</span>
+          <span>${p.readTime} read</span>
+        </div>
+        ${p.status==='published'?`<button class="blog-read-more" style="margin-top:12px">Read essay →</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function filterStore(g,btn){
+  storeFilter=g;
+  document.querySelectorAll('.genre-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderStore();
+}
+function searchStore(v){storeSearch=v;renderStore()}
+function filterBlog(g,btn){
+  blogFilter=g;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBlog();
+}
+function updateCurrency(){
+  currentCurrency=document.getElementById('currency-select').value;
+  renderStore();renderFeaturedBooks();
+}
+
+// ── BOOK MODAL ──
+function openBook(id){
+  const b=books.find(x=>x.id===id);
+  document.getElementById('modal-body').innerHTML=`
+    <div class="modal-book-layout">
+      <div class="modal-cover" style="background:${b.bg};color:${b.color}">${b.cover}</div>
+      <div class="modal-info">
+        <span class="book-genre tag-${b.genre}" style="margin-bottom:12px;display:inline-block">${b.genre}</span>
+        <h2>${b.title}</h2>
+        <p class="book-author">by B.Krishna</p>
+        <p class="modal-desc">${b.desc}</p>
+        <div class="modal-price-row">
+          <span class="modal-price">${formatPrice(b.price)}</span>
+          <button class="btn-checkout" onclick="triggerCheckout(this)">Buy Now — Secure Checkout 🔒</button>
+        </div>
+        <div class="checkout-anim" id="checkout-anim">
+          <div class="spinner"></div> Processing secure payment…
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('book-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('book-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function triggerCheckout(btn){
+  btn.disabled=true;btn.textContent='Processing…';
+  document.getElementById('checkout-anim').classList.add('show');
+  setTimeout(()=>{
+    document.getElementById('checkout-anim').innerHTML='✅ Order placed! Check your email for the download link.';
+  },2500);
+}
+document.getElementById('book-modal').addEventListener('click',e=>{if(e.target===document.getElementById('book-modal'))closeModal()});
+
+// ── LEGAL MODALS ──
+const legalContent={
+  privacy:`<h2 style="font-family:'Playfair Display',serif;margin-bottom:16px">Privacy Policy</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">Last updated: June 2026</p>
+    <p style="margin-bottom:12px;font-size:.92rem;line-height:1.75">Wisdom Circle ("we", "us") respects your privacy. This policy explains what data we collect, how we use it, and your rights.</p>
+    <h3 style="font-family:'Playfair Display',serif;margin:20px 0 8px">Data We Collect</h3>
+    <p style="font-size:.9rem;color:var(--muted);line-height:1.7">We collect email addresses when you make a purchase, basic analytics (page views, session length) via privacy-respecting tools, and cookies necessary for site function.</p>
+    <h3 style="font-family:'Playfair Display',serif;margin:20px 0 8px">How We Use It</h3>
+    <p style="font-size:.9rem;color:var(--muted);line-height:1.7">Your data is used to deliver purchased books, send order confirmations, and improve the site. We never sell your data to third parties.</p>
+    <h3 style="font-family:'Playfair Display',serif;margin:20px 0 8px">Your Rights</h3>
+    <p style="font-size:.9rem;color:var(--muted);line-height:1.7">You may request deletion of your data at any time by emailing us. You can also opt out of analytics cookies via the cookie settings.</p>`,
+  terms:`<h2 style="font-family:'Playfair Display',serif;margin-bottom:16px">Terms of Use</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">Last updated: June 2026</p>
+    <p style="margin-bottom:12px;font-size:.92rem;line-height:1.75">By using Wisdom Circle, you agree to these terms. Please read them carefully.</p>
+    <h3 style="font-family:'Playfair Display',serif;margin:20px 0 8px">Intellectual Property</h3>
+    <p style="font-size:.9rem;color:var(--muted);line-height:1.7">All books, blog posts and resources on this site are authored by B.Krishna and protected by copyright. You may not reproduce, distribute or resell any content without written permission.</p>
+    <h3 style="font-family:'Playfair Display',serif;margin:20px 0 8px">Purchases</h3>
+    <p style="font-size:.9rem;color:var(--muted);line-height:1.7">All sales are final unless a technical error prevents delivery. If you experience an issue, contact us within 7 days of purchase for support.</p>
+    <h3 style="font-family:'Playfair Display',serif;margin:20px 0 8px">Acceptable Use</h3>
+    <p style="font-size:.9rem;color:var(--muted);line-height:1.7">You agree not to use this site for any unlawful purpose, to impersonate others, or to attempt to disrupt site services.</p>`
+};
+function showModal(type){
+  document.getElementById('legal-body').innerHTML=legalContent[type];
+  document.getElementById('legal-modal').style.display='flex';
+  document.body.style.overflow='hidden';
+  return false;
+}
+function closeLegal(){
+  document.getElementById('legal-modal').style.display='none';
+  document.body.style.overflow='';
+}
+
+// ── PAGE NAV ──
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  const nb=document.getElementById('nav-'+name);
+  if(nb)nb.classList.add('active');
+  window.scrollTo(0,0);
+  if(name==='store')renderStore();
+  if(name==='blog')renderBlog();
+  if(name==='resources'){setTimeout(()=>{plotGraph();},200);}
+}
+function toggleMobile(){
+  const m=document.getElementById('mobile-menu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+}
+
+// ── COOKIE ──
+function acceptCookies(){
+  document.getElementById('cookie-banner').style.display='none';
+}
+
+// ── TOOLS ──
+function toggleTool(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.tool-expand');
+  body.classList.toggle('open');
+  arrow.textContent=body.classList.contains('open')?'▴':'▾';
+}
+
+// ── CALC ──
+let calcVal='';
+function calcFn(v){
+  if(calcVal==='Error'||calcVal==='0')calcVal='';
+  calcVal+=v;
+  document.getElementById('calc-display').textContent=calcVal||'0';
+}
+function calcClear(){calcVal='';document.getElementById('calc-display').textContent='0';}
+function calcDel(){calcVal=calcVal.slice(0,-1);document.getElementById('calc-display').textContent=calcVal||'0';}
+function calcEval(){
+  try{
+    const expr=calcVal.replace(/sqrt\(/g,'Math.sqrt(').replace(/log\(/g,'Math.log10(').replace(/sin\(/g,'Math.sin(').replace(/cos\(/g,'Math.cos(').replace(/tan\(/g,'Math.tan(');
+    const r=Function('"use strict";return('+expr+')')();
+    calcVal=String(parseFloat(r.toFixed(10)));
+    document.getElementById('calc-display').textContent=calcVal;
+  }catch{document.getElementById('calc-display').textContent='Error';calcVal='';}
+}
+
+// ── EQUATION SOLVER ──
+function solveEq(){
+  const raw=document.getElementById('eq-input').value.trim();
+  const out=document.getElementById('eq-result');
+  if(!raw){out.textContent='Please enter an equation.';return;}
+  try{
+    if(raw.includes('=')){
+      const parts=raw.split('=');
+      const lhs=parts[0].trim(),rhs=parts[1].trim();
+      // Detect quadratic ax^2+bx+c=0
+      const quadMatch=lhs.match(/^([+-]?\d*\.?\d*)x\^2\s*([+-]\s*\d*\.?\d*)x\s*([+-]\s*\d*\.?\d*)$/);
+      if(quadMatch&&parseFloat(rhs)===0){
+        const a=parseFloat(quadMatch[1])||1;
+        const b=parseFloat(quadMatch[2].replace(/\s/g,''));
+        const c=parseFloat(quadMatch[3].replace(/\s/g,''));
+        const disc=b*b-4*a*c;
+        if(disc<0){out.textContent='No real solutions (discriminant < 0)';return;}
+        const x1=(-b+Math.sqrt(disc))/(2*a);
+        const x2=(-b-Math.sqrt(disc))/(2*a);
+        out.textContent=disc===0?`x = ${x1.toFixed(4)}`:`x₁ = ${x1.toFixed(4)},  x₂ = ${x2.toFixed(4)}`;return;
+      }
+      // Linear: ax + b = c
+      const linMatch=lhs.match(/^([+-]?\d*\.?\d*)x\s*([+-]\s*\d+\.?\d*)?$/);
+      if(linMatch){
+        const a=parseFloat(linMatch[1])||1;
+        const b=parseFloat((linMatch[2]||'0').replace(/\s/g,''))||0;
+        const c=parseFloat(rhs);
+        out.textContent=`x = ${((c-b)/a).toFixed(6)}`;return;
+      }
+      // Evaluate both sides
+      const lv=Function('"use strict";let x=0;return('+lhs+')')();
+      const rv=Function('"use strict";let x=0;return('+rhs+')')();
+      out.textContent=lv===rv?'True for all x (identity)':'Numerical evaluation: LHS='+lv+', RHS='+rv;
+    } else {
+      const r=Function('"use strict";return('+raw+')')();
+      out.textContent='= '+r;
+    }
+  }catch{out.textContent='Could not solve. Check your syntax and try again.';}
+}
+
+// ── GRAPH PLOTTER ──
+function plotGraph(){
+  const canvas=document.getElementById('graphCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const fn=document.getElementById('graph-input').value||'Math.sin(x)';
+  const xMin=-10,xMax=10,yMin=-5,yMax=5;
+  const toCanvas=(x,y)=>[(x-xMin)/(xMax-xMin)*W,(1-(y-yMin)/(yMax-yMin))*H];
+  // Grid
+  ctx.strokeStyle='rgba(28,20,16,.07)';ctx.lineWidth=1;
+  for(let i=xMin;i<=xMax;i++){const[cx]=toCanvas(i,0);ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();}
+  for(let i=yMin;i<=yMax;i++){const[,cy]=toCanvas(0,i);ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();}
+  // Axes
+  ctx.strokeStyle='rgba(28,20,16,.25)';ctx.lineWidth=1.5;
+  const[ax0]=toCanvas(0,0);const[,ay0]=toCanvas(0,0);
+  ctx.beginPath();ctx.moveTo(0,ay0);ctx.lineTo(W,ay0);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ax0,0);ctx.lineTo(ax0,H);ctx.stroke();
+  // Curve
+  ctx.strokeStyle='#2D5A3D';ctx.lineWidth=2.5;ctx.beginPath();
+  let started=false;
+  for(let px=0;px<W;px++){
+    const x=xMin+(px/W)*(xMax-xMin);
+    try{
+      const y=Function('"use strict";let x='+x+';return('+fn+')')();
+      if(isNaN(y)||!isFinite(y)){started=false;continue;}
+      const[,py]=toCanvas(x,y);
+      if(!started){ctx.moveTo(px,py);started=true;}else{ctx.lineTo(px,py);}
+    }catch{started=false;}
+  }
+  ctx.stroke();
+}
+
+// ── AI CHAT (uses Anthropic API) ──
+async function sendAI(){
+  const input=document.getElementById('ai-input');
+  const msg=input.value.trim();
+  if(!msg)return;
+  const messagesEl=document.getElementById('ai-messages');
+  messagesEl.innerHTML+=`<div class="ai-msg user">${escHtml(msg)}</div>`;
+  input.value='';
+  messagesEl.innerHTML+=`<div class="ai-msg bot" id="ai-thinking">Thinking…</div>`;
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:'You are the Wisdom Circle AI study assistant, created for the Wisdom Circle platform by B.Krishna. You help students with academic questions — maths, science, history, philosophy, literature, and general study help. Keep answers clear, warm and helpful. Use simple language. If a question is unrelated to studying, gently redirect to academic topics.',
+        messages:[{role:'user',content:msg}]
+      })
+    });
+    const data=await res.json();
+    const reply=data.content?.map(i=>i.text||'').join('')||'Sorry, I could not get a response.';
+    document.getElementById('ai-thinking').textContent=reply;
+  }catch{
+    document.getElementById('ai-thinking').textContent='Sorry, the AI is temporarily unavailable. Please try again shortly.';
+  }
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// ── SCROLL REVEAL ──
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ── INIT ──
+renderFeaturedBooks();
+renderBlog();
+renderStore();
+setTimeout(()=>{plotGraph();},500);
+</script>
+</body>
+</html>
